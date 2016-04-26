@@ -14,8 +14,8 @@ removed.
 
 Role Variables
 --------------
-- `tmpdir`: root directory to use; default to the system tmp directory
-- `template`: template to use for directory name; defaults to tmp.XXXXXXXX
+- ``tmpdir``: root directory to use; default to the system tmp directory
+- ``template``: template to use for directory name; defaults to tmp.XXXXXXXX
 
 Example Playbook
 ----------------
@@ -24,7 +24,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: tmpdir, root: '/tmp', template: tmp.XXXXXXXX }
+        - { role: tmpdir, tmpdir: '/tmp', template: tmp.XXXXXXXX }
 
 License
 -------
