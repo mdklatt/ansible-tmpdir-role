@@ -1,2 +1,8 @@
----
-# handlers file for tmpdir
+## Handlers for the tmpdir task.
+##
+- name: remove temporary directory
+  become: True
+  file: 
+    path: "{{ mktemp.stdout }}"
+    state: absent
+  

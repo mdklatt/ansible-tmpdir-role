@@ -1,2 +1,6 @@
----
-# defaults file for tmpdir
+## Default variables for the tmpdir role.
+##
+## These variables have the lowest priority and can be overriden at runtime.
+##
+tmpdir: "{{ ansible_env.TMPDIR|default('/tmp') }}"
+template: "{{ 'tmp.XXXXXXXX' }}"

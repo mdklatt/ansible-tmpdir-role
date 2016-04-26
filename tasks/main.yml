@@ -1,2 +1,9 @@
----
-# tasks file for tmpdir
+## Tasks for the tmpdir role.
+##
+- name: create temporary directory
+  command: "mktemp -d --tmpdir={{ tmpdir }} {{ template }}"
+  notify: remove temporary directory
+  register: mktemp
+
+- debug:
+    msg: "using temporary directory {{ mktemp.stdout }}"
