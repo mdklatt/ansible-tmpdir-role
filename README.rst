@@ -1,7 +1,7 @@
-..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-role-tmpdir.png?branch=master
+..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.png?branch=master
     :alt: Travis CI build status
     :target: `travis`_
-..  _travis: https://travis-ci.org/mdklatt/ansible-role-tmpdir
+..  _travis: https://travis-ci.org/mdklatt/ansible-tmpdir-role
 
 tmpdir |travis.png|
 ===================
