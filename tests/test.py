@@ -1,8 +1,10 @@
 """ Test the tmpdir role.
 
-For now, this checks the syntax. No functionality is tested.
+This verifies that the role runs without errors, but does not verify that the 
+temporary directory is correctly created and deleted.
 
 """
+from argparse import ArgumentParser
 from contextlib import contextmanager
 from os import chdir
 from os import getcwd
@@ -20,8 +22,23 @@ from tempfile import mkdtemp
 _ROLE = "tmpdir"
 
 
-def main():
+def _cmdline(argv=None):
+    """ Parse command line arguments.
+    
+    By default, sys.argv is parsed.
+    
+    """
+    parser = ArgumentParser()
+    parser.add_argument("--syntax", action="store_true",
+                        help="syntax check only")
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
     """ Run tests.
+    
+    This will install the role to a temporary directory and verify that the
+    role correctly creates and removes a (different) temporary directory.
     
     """
     # TODO: Need to verify that the role is installable via `ansible-galaxy`.
@@ -48,12 +65,16 @@ def main():
             copytree(join(origin, name), join(_ROLE, name))
         return
 
+    args = _cmdline(argv)
     origin = dirname(dirname(abspath(__file__)))
     print(origin)
     with tmpdir() as tmp:
         root = join(tmp, _ROLE)
         install()
-        ansible = "ansible-playbook --syntax-check -i inventory test.yml"
+        if args.syntax:
+            ansible = "ansible-playbook --syntax-check -i inventory test.yml"
+        else:
+            ansible = "ansible-playbook -i inventory test.yml"            
         check_call(split(ansible), cwd=join(root, "tests"))
     return
 
