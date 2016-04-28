@@ -1,5 +1,21 @@
----
+## Test playbook for the tmpdir role.
+##
 - hosts: localhost
-  remote_user: root
+
   roles:
-  - { role: tmpdir } 
+  - { role: tmpdir, tmpdir: '/tmp', template: tmp.XXXXXXXX } 
+
+  tasks:
+  - name: verify that directory exists
+    stat:
+      path: "{{ mktemp.stdout }}"
+    register: task
+    failed_when: not task.stat.isdir
+    
+  post_tasks:
+  - name: verify that directory does not exist
+    # This must run after the tmpdir handler.
+    stat:
+      path: "{{ mktemp.stdout }}"
+    register: task
+    failed_when: task.stat.exists

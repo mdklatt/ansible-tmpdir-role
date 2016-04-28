@@ -1,6 +1,7 @@
 ## Tasks for the tmpdir role.
 ##
 - name: create temporary directory
+  # FIXME: BSD mktemp (e.g. OS X) does not support --tmpdir.
   command: "mktemp -d --tmpdir={{ tmpdir }} {{ template }}"
   notify: remove temporary directory
   register: mktemp
