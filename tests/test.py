@@ -1,7 +1,6 @@
 """ Test the tmpdir role.
 
-For now, this just verifies that the role can be installed and checks the
-syntax. No functionality is tested.
+For now, this checks the syntax. No functionality is tested.
 
 """
 from contextlib import contextmanager
@@ -25,6 +24,10 @@ def main():
     """ Run tests.
     
     """
+    # TODO: Need to verify that the role is installable via `ansible-galaxy`.
+    # The meta/main.yml file contains a 'galaxy_info' directory that needs to
+    # be valid for the role to be installed from a git repo.
+
     @contextmanager
     def tmpdir():
         """ Enter a self-deleting temporary directory. """
@@ -40,7 +43,6 @@ def main():
     
     def install():
         """ Install the role in the current directory. """
-        # TODO: Can ansible-galaxy do this?
         dirs = "defaults", "handlers", "meta", "tasks", "tests"
         for name in dirs:
             copytree(join(origin, name), join(_ROLE, name))
