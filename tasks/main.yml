@@ -1,9 +1,13 @@
 ## Tasks for the tmpdir role.
 ##
 - name: create temporary directory
-  command: "mktemp -d {{ tmpdir }}/{{ template }}"
+  command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"
   notify: remove temporary directory
   register: mktemp
 
+- name: export directory name
+  set_fact:
+    tmpdir_path: "{{ mktemp.stdout }}"
+    
 - debug:
-    msg: "using temporary directory {{ mktemp.stdout }}"
+    msg: "using temporary directory {{ tmpdir_path }}"

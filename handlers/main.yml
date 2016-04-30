@@ -2,6 +2,6 @@
 ##
 - name: remove temporary directory
   file: 
-    path: "{{ mktemp.stdout }}"
+    path: "{{ tmpdir_path }}"
     state: absent
   
