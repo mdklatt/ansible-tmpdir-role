@@ -1,15 +1,11 @@
 """ Test the tmpdir role.
 
-This verifies that the role runs without errors, but does not verify that the 
-temporary directory is correctly created and deleted.
-
 """
 from argparse import ArgumentParser
 from contextlib import contextmanager
 from os import chdir
 from os import getcwd
 from os.path import abspath
-from os.path import basename
 from os.path import dirname
 from os.path import join
 from shlex import split
@@ -67,14 +63,13 @@ def main(argv=None):
 
     args = _cmdline(argv)
     origin = dirname(dirname(abspath(__file__)))
-    print(origin)
     with tmpdir() as tmp:
+        # Make sure to run Ansible with tests/ as the working directory so that
+        # tests/ansible.cfg is used.
         root = join(tmp, _ROLE)
         install()
-        if args.syntax:
-            ansible = "ansible-playbook --syntax-check -i inventory test.yml"
-        else:
-            ansible = "ansible-playbook -i inventory test.yml"            
+        options = "--syntax-check" if args.syntax else ""
+        ansible = "ansible-playbook {:s} test.yml".format(options)
         check_call(split(ansible), cwd=join(root, "tests"))
     return
 
