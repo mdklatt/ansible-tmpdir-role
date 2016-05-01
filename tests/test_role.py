@@ -61,16 +61,27 @@ def main(argv=None):
             copytree(join(origin, name), join(_ROLE, name))
         return
 
+    def ansible():
+        """ Run ansible-playbook. """
+        # Make sure to run Ansible with tests/ as the working directory so that
+        # tests/ansible.cfg is used.
+        extra = " ".join("=".join(var) for var in variables.iteritems())
+        if extra:
+            options.append("--extra-vars '{:s}'".format(extra))
+        cmd = "ansible-playbook {:s} playbook.yml".format(" ".join(options))
+        check_call(split(cmd), cwd=join(root ,"tests"))
+        return
+
     args = _cmdline(argv)
     origin = dirname(dirname(abspath(__file__)))
     with tmpdir() as tmp:
-        # Make sure to run Ansible with tests/ as the working directory so that
-        # tests/ansible.cfg is used.
         root = join(tmp, _ROLE)
         install()
-        options = "--syntax-check" if args.syntax else ""
-        ansible = "ansible-playbook {:s} test.yml".format(options)
-        check_call(split(ansible), cwd=join(root, "tests"))
+        options = []
+        if args.syntax:
+            options.append("--syntax-check")
+        variables = {}
+        ansible()
     return
 
 

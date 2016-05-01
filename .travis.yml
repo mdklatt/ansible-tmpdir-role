@@ -24,7 +24,7 @@ install:
 
 script:
 - ansible --version
-- python tests/test.py
+- python tests/test_role.py
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/
