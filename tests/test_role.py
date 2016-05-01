@@ -1,91 +1,50 @@
-""" Test the tmpdir role.
+""" Test suite for the tmpdir role.
+
+The script can be executed on its own or incorporated into a larger test suite.
+However the tests are run, be aware of which version of the package is actually
+being tested. If the package is installed in site-packages, that version takes
+precedence over the version in this project directory. Use a virtualenv test
+environment or setuptools develop mode to test against the development version.
 
 """
-from argparse import ArgumentParser
-from contextlib import contextmanager
-from os import chdir
-from os import getcwd
 from os.path import abspath
 from os.path import dirname
 from os.path import join
 from shlex import split
 from shutil import copytree
-from shutil import rmtree
-from subprocess import check_call
-from tempfile import mkdtemp
+from subprocess import call
+
+import pytest
 
 
-_ROLE = "tmpdir"
+@pytest.fixture
+def install(tmpdir):
+    """ Install the role in a temporary working directory.
 
-
-def _cmdline(argv=None):
-    """ Parse command line arguments.
-    
-    By default, sys.argv is parsed.
-    
     """
-    parser = ArgumentParser()
-    parser.add_argument("--syntax", action="store_true",
-                        help="syntax check only")
-    return parser.parse_args(argv)
+    pathobj = tmpdir.join("tmpdir")
+    dirs = "defaults", "handlers", "meta", "tasks", "tests"
+    root = dirname(dirname(abspath(__file__)))
+    for name in dirs:
+        copytree(join(root, name), join(pathobj.strpath, name))
+    return pathobj.strpath
 
 
-def main(argv=None):
-    """ Run tests.
-    
-    This will install the role to a temporary directory and verify that the
-    role correctly creates and removes a (different) temporary directory.
-    
+@pytest.mark.parametrize("variables", ({}, {"tmpdir_root": "test"}, {"tmpdir_template": "test.XXXXXX"}))
+def test_tmpdir(install, variables):
+    """ Test the role functionality.
+
     """
-    # TODO: Need to verify that the role is installable via `ansible-galaxy`.
-    # The meta/main.yml file contains a 'galaxy_info' directory that needs to
-    # be valid for the role to be installed from a git repo.
-
-    @contextmanager
-    def tmpdir():
-        """ Enter a self-deleting temporary directory. """
-        cwd = getcwd()
-        tmp = mkdtemp()
-        try:
-            chdir(tmp)
-            yield tmp
-        finally:
-            rmtree(tmp)
-            chdir(cwd)
-        return
-    
-    def install():
-        """ Install the role in the current directory. """
-        dirs = "defaults", "handlers", "meta", "tasks", "tests"
-        for name in dirs:
-            copytree(join(origin, name), join(_ROLE, name))
-        return
-
-    def ansible():
-        """ Run ansible-playbook. """
-        # Make sure to run Ansible with tests/ as the working directory so that
-        # tests/ansible.cfg is used.
-        extra = " ".join("=".join(var) for var in variables.iteritems())
-        if extra:
-            options.append("--extra-vars '{:s}'".format(extra))
-        cmd = "ansible-playbook {:s} playbook.yml".format(" ".join(options))
-        check_call(split(cmd), cwd=join(root ,"tests"))
-        return
-
-    args = _cmdline(argv)
-    origin = dirname(dirname(abspath(__file__)))
-    with tmpdir() as tmp:
-        root = join(tmp, _ROLE)
-        install()
-        options = []
-        if args.syntax:
-            options.append("--syntax-check")
-        variables = {}
-        ansible()
-    return
+    if variables:
+        extra = ("=".join(var) for var in variables.iteritems())
+        options = "--extra-vars '{:s}'".format(" ".join(extra))
+    else:
+        options = ""
+    cmd = "ansible-playbook {:s} playbook.yml".format(options)
+    assert 0 == call(split(cmd), cwd=join(install, "tests"))
 
 
-# Make the script executable.
+# Make the module executable.
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(pytest.main(__file__))

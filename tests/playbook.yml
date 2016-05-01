@@ -1,6 +1,6 @@
 ## Test playbook for the tmpdir role.
 
-- hosts: test
+- hosts: localhost
 
   roles:
   - role: tmpdir

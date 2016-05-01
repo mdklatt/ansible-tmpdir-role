@@ -15,16 +15,17 @@ branches:
 sudo: false  # use container infrastructure
 
 addons:
-  apt:  # lint.travis-ci.org doesn't like this, but it's valid
+  apt:  # lint.travis-ci.org doesn't recognize this yet, but it's valid
     packages:
     - python-pip
 
 install:
 - pip install ansible
+- pip install -r tests/requirements.txt
 
 script:
 - ansible --version
-- python tests/test_role.py
+- py.test --verbose tests/
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/
