@@ -5,3 +5,4 @@ test_template tmpdir_template=test.XXXXXX
 
 [test:vars]
 ansible_connection=local
+tmpdir_debug=True
