@@ -31,7 +31,7 @@ def install(tmpdir):
 
 
 @pytest.mark.parametrize("variables", ({}, {"tmpdir_root": "test"}, {"tmpdir_template": "test.XXXXXX"}))
-def test_tmpdir(install, variables):
+def test_role(install, variables):
     """ Test the role functionality.
 
     """
