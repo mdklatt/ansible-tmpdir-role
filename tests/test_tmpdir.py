@@ -7,31 +7,32 @@ precedence over the version in this project directory. Use a virtualenv test
 environment or setuptools develop mode to test against the development version.
 
 """
+from os import symlink
+from os import remove
 from os.path import abspath
 from os.path import dirname
 from os.path import join
 from shlex import split
-from shutil import copytree
 from subprocess import call
 
 import pytest
 
-
-@pytest.fixture
-def install(tmpdir):
-    """ Install the role in a temporary working directory.
-
-    """
-    pathobj = tmpdir.join("tmpdir")
-    dirs = "defaults", "handlers", "meta", "tasks", "tests"
-    root = dirname(dirname(abspath(__file__)))
-    for name in dirs:
-        copytree(join(root, name), join(pathobj.strpath, name))
-    return pathobj.strpath
+_ROLE = "tmpdir"
 
 
-@pytest.mark.parametrize("variables", ({}, {"tmpdir_root": "test"}, {"tmpdir_template": "test.XXXXXX"}))
-def test_role(install, variables):
+@pytest.yield_fixture(scope="module")
+def mklink():
+    test_path = dirname(abspath(__file__))
+    role_link = join(test_path, _ROLE)
+    symlink(dirname(test_path), role_link)
+    yield
+    remove(role_link)
+    return
+
+
+@pytest.mark.parametrize("variables",
+        ({}, {"tmpdir_root": "test"}, {"tmpdir_template": "test.XXXXXX"}))
+def test_role(mklink, variables):
     """ Test the role functionality.
 
     """
@@ -41,8 +42,7 @@ def test_role(install, variables):
     else:
         options = ""
     cmd = "ansible-playbook {:s} playbook.yml".format(options)
-    assert 0 == call(split(cmd), cwd=join(install, "tests"))
-
+    assert 0 == call(split(cmd), cwd=dirname(abspath(__file__)))
 
 # Make the module executable.
 
