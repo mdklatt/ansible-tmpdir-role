@@ -1,1 +1,1 @@
-localhost ansible_connection=local tmpdir_debug=True
+localhost ansible_connection=local

@@ -2,21 +2,24 @@
 ##
 - debug:
     var: tmpdir_root
-  when: tmpdir_debug
+  tags:
+  - debug
 
 - debug:
     var: tmpdir_template
-  when: tmpdir_debug
+  tags:
+  - debug
 
 - name: create temporary directory
   command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"
   notify: remove temporary directory
-  register: mktemp
+  register: tmpdir_mktemp
 
 - name: export directory name
   set_fact:
-    tmpdir_path: "{{ mktemp.stdout }}"
-    
+    tmpdir_path: "{{ tmpdir_mktemp.stdout }}"
+
 - debug:
     var: tmpdir_path
-  when: tmpdir_debug
+  tags:
+  - debug

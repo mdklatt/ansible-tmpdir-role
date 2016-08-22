@@ -4,4 +4,3 @@
 ##
 tmpdir_root: "{{ ansible_env.TMPDIR|default('/tmp') }}"
 tmpdir_template: tmp.XXXXXXXX
-tmpdir_debug: False
