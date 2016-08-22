@@ -25,7 +25,7 @@ install:
 
 script:
 - ansible --version
-- py.test --verbose tests/test_tmpdir.py
+- py.test --verbose tests/test_role.py
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/

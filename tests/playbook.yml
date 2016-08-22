@@ -1,9 +1,9 @@
 ## Test playbook for the tmpdir role.
-
+##
 - hosts: localhost
 
   roles:
-  - role: tmpdir
+  - name: tmpdir
 
   pre_tasks:
   - name: create root directory
