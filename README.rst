@@ -1,5 +1,6 @@
-..  README for the tmpdir-role project.
+..  README for the tmpdir Ansible role.
 
+======
 tmpdir 
 ======
 ..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.png?branch=master
@@ -10,34 +11,35 @@ tmpdir
 
 |travis.png|
 
-`Ansible`_ role to create a temporary working directory that can be used to
-store files that will automatically be deleted at the end of the play.
+This `Ansible`_ role will create a temporary working directory that will be
+automatically deleted at the end of the play. Only one directory is created
+per play regardless of the number of times this role is included.
 
 
 Requirements
-------------
-
+============
 Requires the ``mktemp`` command on the target machine.
 
 
 Role Variables
---------------
+==============
+- ``tmpdir_root``: root path (must exist); defaults to system tmp directory
+- ``tmpdir_template``: used to create directory name; defaults to ``tmp.XXXXXX``
+- ``tmpdir_path``: directory path; created at runtime
 
-Input
-+++++
-- ``tmpdir_root``: directory root path, which must already exist; defaults to 
-  the system tmp directory
-- ``template``: template used to create the directory name, where a sequence of
-  ``X`` characters is replaced by a unique string; defaults to ``tmp.XXXXXXXX``
+The ``root`` and ``template`` variables should only be set at the playbook
+level. Once the temporary directory is created, changes to these variables will
+have no effect. Thus, other roles that use this role should not depend on being
+able to modify these values for their own use.
 
-Output
-++++++
-- ``tmpdir_path``: the path to the temporary directory
+
+Available Tags
+==============
+- ``debug``: show debugging output
 
 
 Example Playbook
-----------------
-
+================
 ..  code::
 
     - hosts: all

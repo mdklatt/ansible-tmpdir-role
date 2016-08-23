@@ -4,4 +4,9 @@
   file: 
     path: "{{ tmpdir_path }}"
     state: absent
-  
+  notify:
+  - unset tmpdir_path
+
+- name: unset tmpdir_path
+  set_fact:
+    tmpdir_path: ""

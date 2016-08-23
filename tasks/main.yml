@@ -14,10 +14,12 @@
   command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"
   notify: remove temporary directory
   register: tmpdir_mktemp
+  when: not tmpdir_path
 
-- name: export directory name
+- name: set tmpdir_path
   set_fact:
     tmpdir_path: "{{ tmpdir_mktemp.stdout }}"
+  when: not tmpdir_path
 
 - debug:
     var: tmpdir_path

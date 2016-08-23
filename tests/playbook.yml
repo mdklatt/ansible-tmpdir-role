@@ -4,6 +4,7 @@
 
   roles:
   - name: tmpdir
+  - name: tmpdir  # test multiple inclusion
 
   pre_tasks:
   - name: create root directory
@@ -20,3 +21,7 @@
       path: "{{ tmpdir_path }}"
     register: task
     failed_when: task.stat.exists
+  - name: verify that tmpdir_path is unset
+    fail:
+      msg: "tmpdir_path: '{{ tmpdir_path }}'"
+    when: tmpdir_path
