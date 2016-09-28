@@ -7,4 +7,4 @@
 ##
 tmpdir_root: "{{ ansible_env.TMPDIR|default('/tmp') }}"
 tmpdir_template: tmp.XXXXXXXX
-tmpdir_path: None  # set at runtime
+tmpdir_path: ""  # set at runtime
