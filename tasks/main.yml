@@ -3,17 +3,18 @@
 - debug:
     var: tmpdir_root
   tags:
-  - debug
+    - debug
 
 - debug:
     var: tmpdir_template
   tags:
-  - debug
+    - debug
 
 - name: create temporary directory
   command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"
-  notify: remove temporary directory
   register: tmpdir_mktemp
+  notify: 
+    - tmpdir remove
   when: not tmpdir_path
 
 - name: set tmpdir_path
@@ -24,4 +25,4 @@
 - debug:
     var: tmpdir_path
   tags:
-  - debug
+    - debug
