@@ -1,26 +1,26 @@
-## Metadata for the tmpdir role.
+## Metadata for the Ansible tmpdir role.
 ##
 dependencies: []
 
 galaxy_info:
   author: Michael Klatt
   description: Create a temporary working directory.
-  version: 0.1.1
+  version: 0.1.2dev0
   license: MIT
-  min_ansible_version: 2.1
+  min_ansible_version: 2.1.1
 
   # Should work with just about any *nix, but these are the versions it's been
   # tested with.
   platforms:
-  - name: CentOS
-    versions:
-    - 7
-  - name: MacOSX
-    versions:
-    - 10.11
-  - name: Ubuntu
-    versions:
-    - trusty
+    - name: CentOS
+      versions:
+        - 7
+    - name: MacOSX
+      versions:
+        - 10.11
+    - name: Ubuntu
+      versions:
+        - 14.04
 
   # NOTE: A tag is limited to a single word comprised of alphanumeric
   # characters. Maximum of 20 tags per role.
