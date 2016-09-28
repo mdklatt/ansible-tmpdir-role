@@ -2,13 +2,11 @@
 ##
 - debug:
     var: tmpdir_root
-  tags:
-    - debug
+    verbosity: 2
 
 - debug:
     var: tmpdir_template
-  tags:
-    - debug
+    verbosity: 2
 
 - name: create temporary directory
   command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"
@@ -24,5 +22,4 @@
 
 - debug:
     var: tmpdir_path
-  tags:
-    - debug
+    verbosity: 2

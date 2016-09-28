@@ -5,7 +5,7 @@ dependencies: []
 galaxy_info:
   author: Michael Klatt
   description: Create a temporary working directory.
-  version: 0.1.2dev1
+  version: 0.1.2dev2
   license: MIT
   min_ansible_version: 2.1.1
 
@@ -25,4 +25,4 @@ galaxy_info:
   # NOTE: A tag is limited to a single word comprised of alphanumeric
   # characters. Maximum of 20 tags per role.
   galaxy_tags:
-  - system
+    - system
