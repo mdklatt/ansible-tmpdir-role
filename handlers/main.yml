@@ -4,6 +4,7 @@
 ## in the play. Handlers have global scope, and should be named uniquely.
 ##
 - name: tmpdir remove
+  become: "{{ tmpdir_force }}"
   file: 
     path: "{{ tmpdir_path }}"
     state: absent

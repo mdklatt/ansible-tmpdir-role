@@ -26,16 +26,15 @@ Role Variables
 - ``tmpdir_root``: root path (must exist); defaults to system tmp directory
 - ``tmpdir_template``: used to create directory name; defaults to ``tmp.XXXXXX``
 - ``tmpdir_path``: directory path; created at runtime
+- ``tmpdir_force``: remove directory as privileged user; defaults to false
 
 The ``root`` and ``template`` variables should only be set at the playbook
 level. Once the temporary directory is created, changes to these variables will
 have no effect. Thus, other roles that use this role should not depend on being
 able to modify these values for their own use.
 
-
-Available Tags
-==============
-- ``debug``: show debugging output
+Setting ``force`` to true will allow the cleanup handler to remove any files
+that were written by a privleged user.
 
 
 Example Playbook
@@ -45,14 +44,13 @@ Example Playbook
     - hosts: all
       
       roles:
-      - role: tmpdir
-        tmpdir_root: '/tmp'
-        tmpdir_template: tmp.XXXXXXXX
-        tmpdir_debug: True
+        - name: tmpdir
+          tmpdir_root: '/tmp'
+          tmpdir_template: tmp.XXXXXXXX
       
       tasks:
-      - name: download tmpdir source
-        unarchive:
-          src: "https://github.com/mdklatt/ansible-tmpdir-role/archive/master.zip"
-          dest: "{{ tmpdir_path }}"
-          copy: False
+        - name: download tmpdir source
+          unarchive:
+            src: "https://github.com/mdklatt/ansible-tmpdir-role/archive/master.zip"
+            dest: "{{ tmpdir_path }}"
+            copy: false
