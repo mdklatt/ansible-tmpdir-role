@@ -27,5 +27,5 @@ script:
 - ansible --version
 - pytest --verbose tests/test_role.py
 
-# notifications:
-#   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

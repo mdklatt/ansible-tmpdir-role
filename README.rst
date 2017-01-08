@@ -8,12 +8,15 @@ tmpdir
     :target: `travis`_
 ..  _travis: https://travis-ci.org/mdklatt/ansible-tmpdir-role
 ..  _Ansible role: http://docs.ansible.com/ansible/playbooks_roles.html#roles
+..  _Ansible Galaxy: https://galaxy.ansible.com/mdklatt/tmpdir
 
 |travis.png|
 
 This `Ansible role`_ will create a temporary working directory that will be
 automatically deleted at the end of the play. Only one directory is created
 per play regardless of the number of times this role is included.
+
+This role is also available on `Ansible Galaxy`_.
 
 
 Requirements
