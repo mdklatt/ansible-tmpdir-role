@@ -3,26 +3,28 @@
 ======
 tmpdir 
 ======
-..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.png?branch=master
+..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.svg?branch=master
     :alt: Travis CI build status
     :target: `travis`_
 ..  _travis: https://travis-ci.org/mdklatt/ansible-tmpdir-role
-..  _Ansible: http://docs.ansible.com/ansible
+..  _Ansible role: http://docs.ansible.com/ansible/playbooks_roles.html#roles
 
 |travis.png|
 
-This `Ansible`_ role will create a temporary working directory that will be
+This `Ansible role`_ will create a temporary working directory that will be
 automatically deleted at the end of the play. Only one directory is created
 per play regardless of the number of times this role is included.
 
 
 Requirements
 ============
-Requires the ``mktemp`` command on the target machine.
+
+The target machine must have the ``mktemp`` command.
 
 
 Role Variables
 ==============
+
 - ``tmpdir_root``: root path (must exist); defaults to system tmp directory
 - ``tmpdir_template``: used to create directory name; defaults to ``tmp.XXXXXX``
 - ``tmpdir_path``: directory path; created at runtime
@@ -45,12 +47,12 @@ Example Playbook
       
       roles:
         - name: tmpdir
-          tmpdir_root: '/tmp'
+          tmpdir_root: /tmp
           tmpdir_template: tmp.XXXXXXXX
       
       tasks:
         - name: download tmpdir source
           unarchive:
-            src: "https://github.com/mdklatt/ansible-tmpdir-role/archive/master.zip"
+            src: https://github.com/mdklatt/ansible-tmpdir-role/archive/master.zip
             dest: "{{ tmpdir_path }}"
             copy: false
