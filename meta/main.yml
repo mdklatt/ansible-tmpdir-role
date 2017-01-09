@@ -5,7 +5,7 @@ dependencies: []
 galaxy_info:
   author: Michael Klatt
   description: Create a temporary working directory.
-  version: 0.2.1dev3
+  version: 0.2.1
   license: MIT
   min_ansible_version: 2.1.1
 
