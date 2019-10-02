@@ -1,48 +1,28 @@
-# Python
+# Ignore virtualenv environments.
 
-MANIFEST
-build/
-dist/
-*.egg-info/
-*.pyc
-*.pyo
+.venv*/
 
 
-# pytest
+# Ignore pyenv files.
 
-.cache/
-
-
-# Sphinx
-
-_build/
-_static/
-_templates/
+.python-version
 
 
-# virtualenv
-
-venv*/
-
-
-# Vagrant
+# Ignore Vagrant runtime files.
 
 .vagrant/
-.galaxy_install_info
-
-# Ansible
-
-*.retry
 
 
-# IDE settings
+# Ignore settings for various IDEs.
 
 .idea/
 .project/
 .pydevproject/
 nbproject/
+*.code-workspace
+.vscode/
 
-
-# OS-specific
+# Ignore OS metadata files.
 
 .DS_Store
+Thumbs.db

@@ -5,22 +5,22 @@ dependencies: []
 galaxy_info:
   author: Michael Klatt
   description: Create a temporary working directory.
-  version: 0.2.1
+  version: 0.3.0.dev0
   license: MIT
-  min_ansible_version: 2.1.1
+  min_ansible_version: 2.1
 
-  # Should work with just about any *nix, but these are the versions it's been
-  # tested with.
+  # This list is not exhaustive, but the role has been tested with these
+  # platforms.
   platforms:
     - name: EL
       versions:
+        - 6
         - 7
-    - name: MacOSX
-      versions:
-        - 10.11
     - name: Ubuntu
       versions:
         - trusty  # 14.04
+        - xenial  # 16.04
+        - bionic  # 18.04
 
   galaxy_tags:
     - system

@@ -1,8 +1,6 @@
-..  README for the tmpdir Ansible role.
-
-======
+######
 tmpdir 
-======
+######
 ..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.svg?branch=master
     :alt: Travis CI build status
     :target: `travis`_
@@ -19,12 +17,14 @@ per play regardless of the number of times this role is included.
 This role is also available on `Ansible Galaxy`_.
 
 
+============
 Requirements
 ============
 
 The target machine must have the ``mktemp`` command.
 
 
+==============
 Role Variables
 ==============
 
@@ -42,6 +42,7 @@ Setting ``force`` to true will allow the cleanup handler to remove any files
 that were written by a privleged user.
 
 
+================
 Example Playbook
 ================
 ..  code::
@@ -59,3 +60,16 @@ Example Playbook
             src: https://github.com/mdklatt/ansible-tmpdir-role/archive/master.zip
             dest: "{{ tmpdir_path }}"
             copy: false
+
+
+=================
+Molecule Workflow
+=================
+
+.. _Molecule: https://molecule.readthedocs.io/en/stable/getting-started.html#run-a-full-test-sequence
+
+Use the `Molecule`_ framework for cross-platform testing:
+
+.. code-block:: console
+
+    $ python -m molecule test [--destroy=never]

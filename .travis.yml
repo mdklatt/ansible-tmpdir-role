@@ -5,27 +5,24 @@
 language: python
 
 python:
-- "2.7"
+  - "3.6"
 
 branches:
   only:
-  - master
-  - dev
+    - master
+    - dev
 
-sudo: false  # use container infrastructure
-
-addons:
-  apt:  # lint.travis-ci.org doesn't recognize this yet, but it's valid
-    packages:
-    - python-pip
+services:
+  - docker
 
 install:
-- pip install ansible
-- pip install -r tests/requirements.txt
+  - python -m pip install ansible molecule docker
 
 script:
-- ansible --version
-- pytest --verbose tests/test_role.py
+  - ansible --version
+  - molecule --version
+  - molecule test
 
 notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  webhooks:
+    - https://galaxy.ansible.com/api/v1/notifications/
