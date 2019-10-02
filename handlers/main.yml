@@ -5,7 +5,7 @@
 ##
 - name: tmpdir remove
   become: "{{ tmpdir_force }}"
-  file: 
+  file:
     path: "{{ tmpdir_path }}"
     state: absent
   notify:

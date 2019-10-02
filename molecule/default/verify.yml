@@ -9,7 +9,7 @@
       file:
         path: "{{ tmpdir_root }}"
         state: directory
-    
+
   post_tasks:
     - name: verify that directory does not exist
       stat:
