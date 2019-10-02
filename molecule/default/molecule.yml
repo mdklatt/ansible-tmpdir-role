@@ -25,7 +25,8 @@ verifier:
   lint:
     name: ansible-lint
 scenario:
-  test_sequence:  # override default sequence to skip idempotence
+  test_sequence:
+    # Override default sequence to skip idempotence command.
     - dependency
     - lint
     - cleanup
@@ -34,7 +35,6 @@ scenario:
     - create
     - prepare
     - converge
-    # - idempotence  # FIXME
     - side_effect
     - verify
     - cleanup

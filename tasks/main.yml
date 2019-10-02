@@ -8,16 +8,17 @@
     var: tmpdir_template
     verbosity: 2
 
-- name: create temporary directory  # TODO: refactor using tempfile module
-  command: "mktemp -d {{ tmpdir_root }}/{{ tmpdir_template }}"  # noqa 303
-  register: tmpdir_mktemp
-  notify:
-    - tmpdir remove
-  when: not tmpdir_path
-
-- name: set tmpdir_path
-  set_fact:
-    tmpdir_path: "{{ tmpdir_mktemp.stdout }}"
+- name: create temporary directory
+  block:
+    - name: create temporary
+      tempfile:
+        state: directory
+      register: tmpdir_tempfile
+      notify:
+        - tmpdir remove
+    - name: set tmpdir_path
+      set_fact:
+        tmpdir_path: "{{ tmpdir_tempfile.path }}"
   when: not tmpdir_path
 
 - debug:
