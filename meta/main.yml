@@ -1,11 +1,8 @@
-## Metadata for the Ansible tmpdir role.
-##
-dependencies: []
-
+---
 galaxy_info:
   author: Michael Klatt
   description: Create a self-deleting temporary working directory.
-  version: 0.4.0.dev2
+  version: 0.4.0.dev4
   license: MIT
   min_ansible_version: 2.8
 
@@ -25,3 +22,5 @@ galaxy_info:
   galaxy_tags:
     - system
     - utility
+
+dependencies: []
