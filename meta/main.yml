@@ -5,9 +5,9 @@ dependencies: []
 galaxy_info:
   author: Michael Klatt
   description: Create a self-deleting temporary working directory.
-  version: 0.3.1.dev0
+  version: 0.4.0.dev0
   license: MIT
-  min_ansible_version: 2.6
+  min_ansible_version: 2.8
 
   # This list is not exhaustive, but the role has been tested with these
   # platforms.

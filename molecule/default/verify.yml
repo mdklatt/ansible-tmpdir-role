@@ -5,18 +5,18 @@
     - name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"  # test multiple inclusion
 
   pre_tasks:
-    - name: create root directory
+    - name: Create root directory
       file:
         path: "{{ tmpdir_root }}"
         state: directory
 
   post_tasks:
-    - name: verify that directory does not exist
+    - name: Verify that directory does not exist
       stat:
         path: "{{ tmpdir_path }}"
       register: task
       failed_when: task.stat.exists
-    - name: verify that tmpdir_path is unset
+    - name: Verify that tmpdir_path is unset
       fail:
         msg: "tmpdir_path: '{{ tmpdir_path }}'"
-      when: tmpdir_path
+      when: tmpdir_path|bool

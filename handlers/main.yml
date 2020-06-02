@@ -13,4 +13,4 @@
 
 - name: tmpdir unset
   set_fact:
-    tmpdir_path: ""
+    tmpdir_path: null
