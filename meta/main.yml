@@ -3,7 +3,7 @@ galaxy_info:
   role_name: tmpdir
   author: Michael Klatt
   description: Create a self-deleting temporary working directory.
-  version: 0.4.1.dev2
+  version: 0.4.1
   license: MIT
   min_ansible_version: 2.8
 
