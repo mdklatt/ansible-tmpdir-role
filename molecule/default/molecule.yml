@@ -6,8 +6,6 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: EL6
-    image: centos:6
   - name: EL7
     image: centos:7
   - name: Xenial

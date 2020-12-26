@@ -2,7 +2,7 @@
 galaxy_info:
   author: Michael Klatt
   description: Create a self-deleting temporary working directory.
-  version: 0.4.1.dev0
+  version: 0.4.1.dev1
   license: MIT
   min_ansible_version: 2.8
 
@@ -11,7 +11,6 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 6
         - 7
     - name: Ubuntu
       versions:
