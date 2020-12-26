@@ -1,12 +1,6 @@
 ######
 tmpdir 
 ######
-..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.svg?branch=master
-    :alt: Travis CI build status
-    :target: `travis`_
-..  _travis: https://travis-ci.org/mdklatt/ansible-tmpdir-role
-..  _Ansible role: http://docs.ansible.com/ansible/playbooks_roles.html#roles
-..  _Ansible Galaxy: https://galaxy.ansible.com/mdklatt/tmpdir
 
 |travis.png|
 
@@ -72,4 +66,12 @@ Use the `Molecule`_ framework for cross-platform testing:
 
 .. code-block:: console
 
-    $ python -m molecule test [--destroy=never]
+    $ python -m molecule --all --parallel test
+
+
+..  |travis.png| image:: https://travis-ci.org/mdklatt/ansible-tmpdir-role.svg?branch=main
+    :alt: Travis CI build status
+    :target: `travis`_
+..  _travis: https://travis-ci.org/mdklatt/ansible-tmpdir-role
+..  _Ansible role: http://docs.ansible.com/ansible/playbooks_roles.html#roles
+..  _Ansible Galaxy: https://galaxy.ansible.com/mdklatt/tmpdir
